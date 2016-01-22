@@ -8,7 +8,7 @@
   <?php echo css_url("/bootstrap.css") ?>
   <?php echo css_url("/signin.css") ?>
   <?php echo css_url("/bootstrap-fileupload.css") ?>
-	<title>蔡阿姨管理程式</title>
+	<title>物理營後台系統</title>
 </head>
 
 
@@ -18,7 +18,7 @@
     <div class="container">
 
       <form class="form-signin" role="form" method="POST" action="./login">
-        <h2 class="form-signin-heading">蔡阿姨宿舍管理系統</h2>
+        <h2 class="form-signin-heading">物理營後台系統</h2>
 
         <input type="text" name="username" class="form-control" placeholder="帳號"  autofocus="">
         <input type="password" name="password"  class="form-control" placeholder="密碼" >
