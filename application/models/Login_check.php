@@ -14,7 +14,7 @@ class login_check extends CI_Model
      //get the username & password from tbl_usrs
      function get_user($usr, $pwd)
      {
-          $sql = "select `name`,`power`, `m_id` from `manager` where `user` = '" . $usr . "' and pass = '" . md5($pwd) . "' and active = 1";
+          $sql = "select `name`,`power`, `id` from `user` where `user` = '" . $usr . "' and pass = '" . md5($pwd) . "' and active = 1";
           $query = $this->db->query($sql);
           return $query->row();
      }
@@ -52,7 +52,7 @@ class login_check extends CI_Model
     }
     function mobile($token){
       
-      $this->db->select('name, user, power, m_id')->from('manager')->where('token', $token)->where('active', 1);
+      $this->db->select('name, user, power, id')->from('user')->where('token', $token)->where('active', 1);
       $result = $this->db->get();
       $temp = $result->result_array();
       if (count($temp) != 1) {
@@ -63,7 +63,7 @@ class login_check extends CI_Model
         $sessiondata = array(
             'user' => $temp[0]['name'],
             'power' => $temp[0]['power'],
-            'm_id' => $temp[0]['m_id']
+            'm_id' => $temp[0]['id']
           );
         $this->load->library('session');
         $this->session->set_userdata($sessiondata);

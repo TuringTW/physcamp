@@ -21,7 +21,7 @@ class Login extends CI_Controller
 		if (!(is_null($user)||is_null($pass))) {
 
 			$pass_encrypt = md5($pass);
-			$this->db->select('user, name, m_id, power')->from('manager')->where('user', $user)->where('pass', $pass_encrypt);
+			$this->db->select('user, name, id, power')->from('user')->where('user', $user)->where('pass', $pass_encrypt);
 			$query = $this->db->get();
 			$temp = $query->result_array();
 			if (count($temp)==1) {
@@ -30,9 +30,9 @@ class Login extends CI_Controller
 				$randnum = rand()*$time;
 				$token = md5($randnum);
 				$data = array('token'=>$token);
-				$this->db->where('m_id', $temp[0]['m_id']);
+				$this->db->where('id', $temp[0]['id']);
 
-				$this->db->update('manager', $data);
+				$this->db->update('user', $data);
 				$result['json_data'][1] = $token;
 				$result['json_data'][0] = TRUE;
 			}
@@ -60,7 +60,7 @@ class Login extends CI_Controller
 				$sessiondata = array(
 						'user' => $result->name,
 						'power' => $result->power,
-						'm_id' => $result->m_id
+						'm_id' => $result->id
 					);
 				$this->session->set_userdata($sessiondata);
 				// $this->load->view(print_r($this->session));

@@ -33,5 +33,5 @@ class Mitem extends CI_Model
         return $result;
     }
     
-    
+
 }?>

@@ -14,7 +14,7 @@ function initMap() {
     navigationControl: false,
     mapTypeControl: false,
     scaleControl: false,
-    draggable: false,
+    draggable: true,
     scaleControl: false,
     scrollwheel: false,
   });
