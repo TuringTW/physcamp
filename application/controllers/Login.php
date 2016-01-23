@@ -12,7 +12,33 @@ class Login extends CI_Controller
 		$this->session->sess_destroy();
 
 	}
+	public function mobile_login(){
+		$user = $this->input->post('user', TRUE);
+		$pass = $this->input->post('pass', TRUE);
 
+		$result['json_data'][0] = false;
+
+		if (!(is_null($user)||is_null($pass))) {
+
+			$pass_encrypt = md5($pass);
+			$this->db->select('user, name, m_id, power')->from('manager')->where('user', $user)->where('pass', $pass_encrypt);
+			$query = $this->db->get();
+			$temp = $query->result_array();
+			if (count($temp)==1) {
+				$time = date('U');
+				srand($time);
+				$randnum = rand()*$time;
+				$token = md5($randnum);
+				$data = array('token'=>$token);
+				$this->db->where('m_id', $temp[0]['m_id']);
+
+				$this->db->update('manager', $data);
+				$result['json_data'][1] = $token;
+				$result['json_data'][0] = TRUE;
+			}
+		}
+		$this->load->view('template/jsonview', $result);
+	}
 	public function index()
 	{
 		//get the posted values
@@ -41,7 +67,7 @@ class Login extends CI_Controller
 
 				redirect('/index');
 			}else{
-				redirect('/login');
+				redirect('/login?error=1');
 			}
 		}
 	}

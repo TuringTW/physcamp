@@ -2,7 +2,7 @@
 </div>
 </div>
 </body>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjIndPdT0xxRoICFwBn80KBwexWYMYu9o&signed_in=true&callback=initMap"></script>
+
 	<?php echo js_url('/jquery-2.1.0.js')?>
 	<?php echo js_url('/bootstrap.min.js')?>
 	<?php echo js_url('/bootstrap.js')?>

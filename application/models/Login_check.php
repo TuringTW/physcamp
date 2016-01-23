@@ -50,4 +50,24 @@ class login_check extends CI_Model
 		
 		
     }
+    function mobile($token){
+      
+      $this->db->select('name, user, power, m_id')->from('manager')->where('token', $token)->where('active', 1);
+      $result = $this->db->get();
+      $temp = $result->result_array();
+      if (count($temp) != 1) {
+        redirect('/login');
+        // print_r($temp);
+
+      }else{
+        $sessiondata = array(
+            'user' => $temp[0]['name'],
+            'power' => $temp[0]['power'],
+            'm_id' => $temp[0]['m_id']
+          );
+        $this->load->library('session');
+        $this->session->set_userdata($sessiondata);
+      }
+      
+    }
 }?>

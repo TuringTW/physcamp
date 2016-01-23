@@ -2,7 +2,7 @@
 
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Msite extends CI_Model
+class Mmission extends CI_Model
 {
      function __construct()
      {

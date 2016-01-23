@@ -12,9 +12,11 @@
 			<div class = "collapse navbar-collapse navHeadercollapse">
 				<ul class = "nav navbar-nav navbar-left" id="nav">
 					<!-- <li><a href = "<?=web_url('/index/index')?>">Home</a></li> -->
-					<li><a href = "<?=web_url('/system/qna')?>">道具</a></li>
-					<li><a href = "<?=web_url('/system/qna')?>">道具</a></li>
-					<li><a href = "<?=web_url('/system/qna')?>">Log</a></li>
+					<li><a href = "<?=web_url('/site/index')?>">據點資料</a></li>
+					<li><a href = "<?=web_url('/item/index')?>">道具</a></li>
+					<li><a href = "<?=web_url('/mission/index')?>">任務</a></li>
+					<li><a href = "<?=web_url('/system/log')?>">System</a></li>
+					
 					<!-- <li class="dropdown">
 						<a herf="#" class="dropdown-toggle" data-toggle="dropdown" data-target="dropdown">道具</a>
 						<ul class="dropdown-menu">

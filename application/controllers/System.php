@@ -1,5 +1,5 @@
 <?php
-class Site extends CI_Controller 
+class System extends CI_Controller 
 {
 	public function __construct()
 	{
@@ -20,18 +20,23 @@ class Site extends CI_Controller
 		$this->load->view("template/header");
 		$this->load->view("template/header_2", $data);
 	}
-	public function get_all_site()
-	{
-		$data['json_data'] = $this->Msite->get_all_site();
-		$this->load->view('template/jsonview', $data);
-	}
+	
 
-	public function index(){
+	public function log(){
 		$this->view_header();
 		$data['site'] = $this->Msite->get_all_site();
 		$data['active'] = 0;
-		$this->load->view("site/sidebar",$data);
-		$this->load->view("site/control_panel",$data);
+		$this->load->view("system/sidebar",$data);
+		
+	}
+	public function qrgen(){
+		$this->view_header();
+		$data['site'] = $this->Msite->get_all_site();
+		$data['active'] = 1;
+		$this->load->view("system/sidebar",$data);
+		$this->load->view("system/qrgen/control_panel",$data);
+
+
 	}
 
 }

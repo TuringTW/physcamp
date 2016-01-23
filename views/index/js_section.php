@@ -1,8 +1,10 @@
 <?php function js_section(){ ?>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjIndPdT0xxRoICFwBn80KBwexWYMYu9o&signed_in=true&callback=initMap"></script>
 <script type="text/javascript">
 var map;
 var ssize;
 var markers = [];
+
 function initMap() {
 
   map = new google.maps.Map(document.getElementById('mapDiv'), {
@@ -13,7 +15,8 @@ function initMap() {
     mapTypeControl: false,
     scaleControl: false,
     draggable: false,
-    scaleControl: false
+    scaleControl: false,
+    scrollwheel: false,
   });
 
   // // This event listener will call addMarker() when the map is clicked.
@@ -135,12 +138,18 @@ function refreshmarker(){
 
 
 	xhr.onreadystatechange = display_datas; 
-	setTimeout('refreshmarker()',15000); 
+	setTimeout('refreshmarker()',10000); 
 }
+var ts=0;
 function refresh_time(t){
 	var t_ref = $('#refresh_t_ref').val();
 	var sec = Math.round((t-t_ref)/1000);
 	$('#refreshtime').html(sec);
+	if (ts==3) {
+		deleteMarkers();
+		initMap();
+	}
+	ts+=1;
 }
 </script>
 <?php } ?>
