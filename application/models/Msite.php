@@ -19,7 +19,7 @@ class Msite extends CI_Model
     {
         $this->db->select('site.id, site.name as sname, lati, longi, owner, type, IF(ISNULL(user.team), 0, user.team) as team')->from('site');
         $this->db->join('user','user.id=site.owner','left');
-        
+        $this->db->order_by('site.name');
 
         $query = $this->db->get();
         $result['sites'] = $query->result_array();

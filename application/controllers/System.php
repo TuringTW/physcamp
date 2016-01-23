@@ -33,6 +33,7 @@ class System extends CI_Controller
 		$this->view_header();
 		$data['site'] = $this->Msite->get_all_site();
 		$data['active'] = 1;
+
 		$this->load->view("system/sidebar",$data);
 		$this->load->view("system/qrgen/control_panel",$data);
 

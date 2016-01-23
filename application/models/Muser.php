@@ -19,7 +19,12 @@ class Muser extends CI_Model
     function get_user_info($user_id){
         $this->db->select('id, name, user, team, level, exp, blood, str, dex, inte, money, wood, iron, ruby, note')->from('user')->where('id', $user_id);
         $query = $this->db->get();
-        $result = $query->result_array()[0];
+        $result['state'] = 0;
+        if ($query->num_rows()>0) {
+            $result['result'] = $query->result_array()[0];      
+            $result['state'] = 1;
+        }
+        
         return $result;
     }
     function add_resource($type, $value, $user_id){
@@ -42,6 +47,11 @@ class Muser extends CI_Model
         }
 
         $this->db->where('id', $user_id);
+        $this->db->update('user', $data);
+    }
+    function minus_hp($user_info, $value){
+        $data = array('blood'=>($user_info['blood']-$value>0)?$user_info['blood']-$value:0);
+        $this->db->where('id', $user_info['id']);
         $this->db->update('user', $data);
     }
     
