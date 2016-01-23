@@ -93,6 +93,7 @@ class Mobile extends CI_Controller
 					$resultData[2] = 2; 	//Rid
 				}else{
 					$war_id = $this->Mwar->start_new_war();
+					$this->Msite->add_visit_record($user_info['id'], $site_info['s_id'], 1);
 					//沒戰爭 發起戰爭
 					$resultData[1] = true;	//state
 					$resultData[2] = 5; 	//Rid
@@ -105,6 +106,39 @@ class Mobile extends CI_Controller
 			}
 
 		}
+		$data['json_data'] = $resultData;
+		$this->load->view('template/jsonview', $data);
+	}
+	public function war_count_down(){
+		$resultData[1] = false;
+		$war_id = $this->input->post('war_id',TRUE);
+		$user_id = $this->session->userdata('m_id');
+		if ($this->Mwar->is_any_rescue($war_id, $user_id)) {
+			//yes there's a rescue, go into war
+
+			$resultData[1] = true;	//state
+			$resultData[2] = 9; 	//Rid
+			$resultData[3] = $site_info['name']; // var 1
+
+
+		}else if($this->Mwar->is_over_180s($war_id, $user_id)){
+			//yes over 180
+			$site_info = $this->Mwar->get_war_site_info($war_id);
+			if ($site_info['state']!=false) {
+				$this->Mwar->set_str_user_win($war_id);
+				$this->Msite->capture_Site($user_id, $site_info['s_id']);
+
+				$resultData[1] = true;	//state
+				$resultData[2] = 7; 	//Rid
+				$resultData[3] = $site_info['name']; // var 1
+			}
+		}else{
+			//no keep waiting
+			$resultData[1] = true;	//state
+			$resultData[2] = 8; 	//Rid
+		}
+
+
 		$data['json_data'] = $resultData;
 		$this->load->view('template/jsonview', $data);
 	}
